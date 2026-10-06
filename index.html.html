@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Agenda IA para Manicures & Nail Designers: modelos prontos para conteúdo, WhatsApp, follow-up e reativação de clientes." />
+  <title>Agenda IA para Manicures & Nail Designers</title>
+  <style>
+    :root{
+      --bg:#fffaf8;
+      --card:#ffffff;
+      --ink:#2d2230;
+      --muted:#6f626e;
+      --pink:#e94f88;
+      --pink-dark:#bf2f69;
+      --blush:#f8d9e5;
+      --nude:#f2e1d6;
+      --gold:#b88a4a;
+      --line:#eadde4;
+      --shadow:0 18px 50px rgba(77,45,64,.12);
+      --radius:24px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+      line-height:1.55;
+    }
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1120px,92%);margin:auto}
+    .topbar{
+      text-align:center;
+      padding:9px 14px;
+      background:#2f2130;
+      color:#fff;
+      font-size:.92rem;
+      letter-spacing:.01em
+    }
+    header{
+      position:sticky; top:0; z-index:20;
+      backdrop-filter:blur(10px);
+      background:rgba(255,250,248,.9);
+      border-bottom:1px solid rgba(234,221,228,.8);
+    }
+    nav{
+      height:70px; display:flex; align-items:center; justify-content:space-between; gap:24px;
+    }
+    .brand{font-weight:900;font-size:1.15rem}
+    .brand span{color:var(--pink)}
+    .nav-cta,.btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      border-radius:999px;font-weight:800;transition:.2s ease;
+    }
+    .nav-cta{
+      padding:12px 20px;background:var(--pink);color:#fff;
+    }
+    .nav-cta:hover,.btn-primary:hover{background:var(--pink-dark);transform:translateY(-1px)}
+    .hero{
+      padding:70px 0 54px;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 78% 22%, rgba(233,79,136,.14), transparent 30%),
+        radial-gradient(circle at 18% 82%, rgba(184,138,74,.10), transparent 28%);
+    }
+    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:54px;align-items:center}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 12px;border-radius:999px;
+      background:#fff;border:1px solid var(--line);color:var(--pink-dark);
+      font-size:.88rem;font-weight:800;
+      box-shadow:0 6px 20px rgba(77,45,64,.06)
+    }
+    h1{
+      margin:20px 0 16px;
+      font-size:clamp(2.35rem,5vw,4.65rem);
+      line-height:.98;
+      letter-spacing:-.045em;
+    }
+    h1 em{font-style:normal;color:var(--pink)}
+    .lead{font-size:1.15rem;color:var(--muted);max-width:680px}
+    .hero-points{
+      margin:24px 0;display:grid;gap:10px;
+      color:#4b3c47
+    }
+    .hero-points div::before{content:"✓";color:var(--pink);font-weight:900;margin-right:10px}
+    .price-row{display:flex;align-items:end;gap:14px;margin:28px 0 18px}
+    .price-label{font-size:.9rem;color:var(--muted)}
+    .price{font-size:2.7rem;line-height:1;font-weight:900;letter-spacing:-.04em}
+    .btn{
+      padding:17px 26px;
+      font-size:1rem;
+      border:0;
+      cursor:pointer;
+    }
+    .btn-primary{background:var(--pink);color:#fff;box-shadow:0 14px 30px rgba(233,79,136,.24)}
+    .micro{margin-top:11px;font-size:.82rem;color:var(--muted)}
+    .product-wrap{position:relative;display:flex;justify-content:center}
+    .product-card{
+      width:min(390px,88%);
+      aspect-ratio:4/5;
+      border-radius:30px;
+      background:
+        linear-gradient(160deg,rgba(255,255,255,.95),rgba(255,240,246,.96)),
+        var(--card);
+      border:1px solid #efd9e3;
+      box-shadow:var(--shadow);
+      padding:34px;
+      position:relative;
+      overflow:hidden;
+      transform:rotate(2deg);
+    }
+    .product-card::before{
+      content:"";
+      position:absolute; width:220px;height:220px;border-radius:50%;
+      background:rgba(233,79,136,.12);right:-65px;top:-60px;
+    }
+    .product-card::after{
+      content:"";
+      position:absolute;width:150px;height:150px;border-radius:50%;
+      background:rgba(184,138,74,.10);left:-50px;bottom:-50px;
+    }
+    .cover-kicker{font-weight:800;color:var(--pink-dark);font-size:.9rem}
+    .cover-title{font-size:3.1rem;line-height:.92;font-weight:950;letter-spacing:-.06em;margin:24px 0 8px}
+    .cover-sub{font-weight:750;font-size:1.05rem}
+    .cover-chip{
+      margin-top:26px;display:inline-block;padding:10px 13px;border-radius:12px;
+      background:#2f2130;color:#fff;font-weight:800;font-size:.82rem
+    }
+    .phone{
+      position:absolute;right:24px;bottom:25px;width:110px;height:190px;
+      border:7px solid #2f2130;border-radius:24px;background:#fff;box-shadow:0 10px 26px rgba(0,0,0,.13);
+      padding:12px 8px;
+    }
+    .bubble{height:12px;background:var(--blush);border-radius:10px;margin:8px 0}
+    .bubble.small{width:70%}.bubble.mid{width:84%}
+    .section{padding:78px 0}
+    .section.alt{background:#fff}
+    .section h2{
+      font-size:clamp(2rem,4vw,3.2rem);
+      line-height:1.05;letter-spacing:-.035em;margin:0 0 16px
+    }
+    .section-intro{color:var(--muted);font-size:1.06rem;max-width:740px;margin-bottom:34px}
+    .pain-grid,.benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{
+      background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+      padding:24px;box-shadow:0 10px 30px rgba(77,45,64,.05)
+    }
+    .card .icon{font-size:1.55rem;margin-bottom:12px}
+    .card h3{margin:0 0 8px;font-size:1.08rem}
+    .card p{margin:0;color:var(--muted);font-size:.95rem}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+    .step{padding:22px;border-radius:20px;background:#fff;border:1px solid var(--line)}
+    .step-num{
+      width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+      background:var(--pink);color:#fff;font-weight:900;margin-bottom:14px
+    }
+    .check-list{
+      display:grid;grid-template-columns:1fr 1fr;gap:12px 26px;
+      padding:0;margin:28px 0 0;list-style:none
+    }
+    .check-list li{padding-left:30px;position:relative}
+    .check-list li::before{content:"✓";position:absolute;left:0;color:var(--pink);font-weight:900}
+    .example{
+      background:#2f2130;color:#fff;border-radius:30px;padding:34px;
+      display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;align-items:start
+    }
+    .example small{color:#d9cbd4}
+    .promptbox{
+      background:#fff;color:var(--ink);border-radius:18px;padding:20px;
+      font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.92rem
+    }
+    .offer{
+      background:linear-gradient(135deg,#3b293b,#211722);
+      color:#fff;border-radius:34px;padding:44px;text-align:center;
+      box-shadow:var(--shadow)
+    }
+    .offer .tag{color:#f3c4d5;font-weight:800}
+    .offer .price{font-size:3.35rem;margin:12px 0}
+    .offer p{color:#e7dfe4}
+    .faq{display:grid;gap:12px;max-width:820px}
+    details{
+      background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px
+    }
+    summary{cursor:pointer;font-weight:800}
+    details p{color:var(--muted);margin:10px 0 0}
+    footer{padding:34px 0 44px;color:var(--muted);font-size:.88rem;text-align:center}
+    .sticky-mobile{display:none}
+    @media(max-width:850px){
+      .hero{padding-top:44px}
+      .hero-grid{grid-template-columns:1fr;gap:38px}
+      .product-wrap{order:-1}
+      .product-card{width:min(330px,86%)}
+      .pain-grid,.benefit-grid{grid-template-columns:1fr}
+      .steps{grid-template-columns:1fr 1fr}
+      .example{grid-template-columns:1fr}
+      .check-list{grid-template-columns:1fr}
+      nav .brand{font-size:1rem}
+      .nav-cta{padding:10px 14px;font-size:.88rem}
+      .sticky-mobile{
+        position:fixed;z-index:30;display:flex;left:12px;right:12px;bottom:12px;
+        background:#fff;border:1px solid var(--line);border-radius:18px;padding:10px;
+        box-shadow:0 16px 38px rgba(45,34,48,.18);
+      }
+      .sticky-mobile .btn{width:100%;padding:14px 18px}
+      body{padding-bottom:82px}
+    }
+    @media(max-width:520px){
+      .topbar{font-size:.8rem}
+      h1{font-size:2.55rem}
+      .lead{font-size:1.02rem}
+      .steps{grid-template-columns:1fr}
+      .offer{padding:34px 22px}
+      .product-card{padding:28px}
+      .cover-title{font-size:2.55rem}
+      .phone{transform:scale(.9);transform-origin:bottom right}
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">Produto digital • Acesso após confirmação do pagamento</div>
+
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">Agenda <span>IA</span></div>
+        <a class="nav-cta" href="https://chk.eduzz.com/8017712K07" target="_blank" rel="noopener">Quero acessar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">✨ Feito para manicures & nail designers</div>
+          <h1>Pare de perder tempo pensando no que <em>postar</em> e no que <em>responder</em>.</h1>
+          <p class="lead">Use modelos prontos de IA para criar conteúdo, responder clientes no WhatsApp, fazer follow-up e organizar sua comunicação com mais rapidez.</p>
+
+          <div class="hero-points">
+            <div>Modelos práticos para Instagram e Stories</div>
+            <div>Mensagens para WhatsApp e follow-up</div>
+            <div>Calendário de conteúdo para 30 dias</div>
+          </div>
+
+          <div class="price-row">
+            <div>
+              <div class="price-label">Acesso ao material digital</div>
+              <div class="price">R$ 29,90</div>
+            </div>
+          </div>
+
+          <a class="btn btn-primary" href="https://chk.eduzz.com/8017712K07" target="_blank" rel="noopener">QUERO O AGENDA IA</a>
+          <div class="micro">Pagamento processado pela Eduzz.</div>
+        </div>
+
+        <div class="product-wrap">
+          <div class="product-card">
+            <div class="cover-kicker">KIT DIGITAL</div>
+            <div class="cover-title">Agenda<br><span style="color:var(--pink)">IA</span></div>
+            <div class="cover-sub">para Manicures &<br>Nail Designers</div>
+            <div class="cover-chip">Conteúdo + WhatsApp + Clientes</div>
+            <div class="phone">
+              <div class="bubble mid"></div>
+              <div class="bubble small"></div>
+              <div class="bubble"></div>
+              <div class="bubble mid"></div>
+              <div class="bubble small"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <h2>Isso acontece com você?</h2>
+        <p class="section-intro">A rotina de atendimento e divulgação pode consumir muito mais tempo do que parece.</p>
+
+        <div class="pain-grid">
+          <div class="card">
+            <div class="icon">📱</div>
+            <h3>“Não sei o que postar hoje.”</h3>
+            <p>Você abre o Instagram, pensa em várias ideias e acaba não publicando nada.</p>
+          </div>
+          <div class="card">
+            <div class="icon">💬</div>
+            <h3>A cliente perguntou e sumiu.</h3>
+            <p>Você enviou o preço, mas não sabe como retomar a conversa sem parecer insistente.</p>
+          </div>
+          <div class="card">
+            <div class="icon">🗓️</div>
+            <h3>Sobraram horários na agenda.</h3>
+            <p>Você quer divulgar as vagas, mas não quer repetir sempre a mesma mensagem.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Uma forma simples de usar IA no seu dia a dia.</h2>
+        <p class="section-intro">O Agenda IA reúne modelos prontos que você adapta ao seu negócio e usa no ChatGPT. Não é necessário entender de programação ou “engenharia de prompts”.</p>
+
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><strong>Escolha o modelo</strong><br><span style="color:var(--muted)">Encontre a situação que você precisa resolver.</span></div>
+          <div class="step"><div class="step-num">2</div><strong>Personalize</strong><br><span style="color:var(--muted)">Troque as informações entre colchetes.</span></div>
+          <div class="step"><div class="step-num">3</div><strong>Cole no ChatGPT</strong><br><span style="color:var(--muted)">A IA cria uma primeira versão para você.</span></div>
+          <div class="step"><div class="step-num">4</div><strong>Revise e use</strong><br><span style="color:var(--muted)">Adapte ao seu jeito antes de enviar ou publicar.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <h2>O que você recebe</h2>
+        <p class="section-intro">Um material de consulta para situações reais da rotina de manicures e nail designers.</p>
+
+        <ul class="check-list">
+          <li>Prompts para Instagram e Stories</li>
+          <li>Mensagens para WhatsApp</li>
+          <li>Follow-up de clientes</li>
+          <li>Reativação de clientes antigas</li>
+          <li>Respostas para objeções como “está caro”</li>
+          <li>Campanhas para horários disponíveis</li>
+          <li>Ideias de promoções</li>
+          <li>Calendário de conteúdo para 30 dias</li>
+          <li>Mensagens prontas para adaptar</li>
+          <li>Guia para criar novos prompts</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="example">
+          <div>
+            <small>EXEMPLO PRÁTICO</small>
+            <h2 style="margin-top:8px">A cliente pediu o preço e não respondeu mais.</h2>
+            <p style="color:#d9cbd4">Em vez de ficar pensando no que escrever, você usa um modelo e adapta em poucos segundos.</p>
+          </div>
+          <div>
+            <div class="promptbox">
+              “Crie uma mensagem curta e cordial para retomar contato com uma cliente que pediu informações sobre [SERVIÇO] e não respondeu. Não quero pressioná-la.”
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <h2>Feito para quem atende clientes de verdade.</h2>
+        <div class="benefit-grid">
+          <div class="card"><div class="icon">💅</div><h3>Manicures</h3><p>Para quem atende em casa, salão, studio ou espaço compartilhado.</p></div>
+          <div class="card"><div class="icon">✨</div><h3>Nail designers</h3><p>Para quem divulga alongamentos, nail art e outros serviços pelas redes sociais.</p></div>
+          <div class="card"><div class="icon">📲</div><h3>Quem usa Instagram e WhatsApp</h3><p>Especialmente para profissionais que cuidam sozinhas do atendimento e da divulgação.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="offer">
+          <div class="tag">ACESSO AO MATERIAL DIGITAL</div>
+          <h2 style="margin:10px 0 0;color:#fff">Agenda IA para Manicures & Nail Designers</h2>
+          <div class="price">R$ 29,90</div>
+          <p>Modelos para conteúdo, WhatsApp, follow-up, reativação de clientes e calendário de 30 dias.</p>
+          <a class="btn btn-primary" href="https://chk.eduzz.com/8017712K07" target="_blank" rel="noopener">QUERO ACESSAR AGORA</a>
+          <div class="micro" style="color:#cfc4ca">Pagamento processado pela Eduzz.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt">
+      <div class="container">
+        <h2>Perguntas frequentes</h2>
+        <div class="faq">
+          <details>
+            <summary>Preciso saber usar ChatGPT?</summary>
+            <p>Não. Os modelos foram criados para você copiar, preencher as informações indicadas e adaptar o resultado antes de usar.</p>
+          </details>
+          <details>
+            <summary>É um produto físico?</summary>
+            <p>Não. O Agenda IA é um produto digital.</p>
+          </details>
+          <details>
+            <summary>Serve somente para manicures?</summary>
+            <p>O material foi desenvolvido especificamente para manicures e nail designers, por isso os exemplos e situações são voltados para essa rotina.</p>
+          </details>
+          <details>
+            <summary>Quando recebo o material?</summary>
+            <p>O acesso é disponibilizado conforme a confirmação do pagamento pela plataforma Eduzz.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © Agenda IA • Produto digital. Nenhum resultado de vendas ou faturamento é garantido.
+    </div>
+  </footer>
+
+  <div class="sticky-mobile">
+    <a class="btn btn-primary" href="https://chk.eduzz.com/8017712K07" target="_blank" rel="noopener">QUERO O AGENDA IA — R$ 29,90</a>
+  </div>
+</body>
+</html>
